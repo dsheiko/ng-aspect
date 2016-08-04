@@ -1,6 +1,6 @@
 # NgAspect 1.0 BETA
 
-`NgAspect` is a little library of decorators that uplocks aspect-oriented programming features in JavaScript.
+`NgAspect` is a little library of decorators that unlocks aspect-oriented programming features in JavaScript.
 
 Aspect-oriented programming suggests separating cross-cutting concerns (logging, caching, monitoring,
 data validation, error detection and so on) from main business logic. In brief it introduces:
