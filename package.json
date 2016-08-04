@@ -1,0 +1,46 @@
+{
+  "name": "ng-aspect",
+  "description": "Decorators to unlock aspect-oriented programming features in JavaScript",
+  "version": "0.0.1",
+  "author": "Dmitry Sheiko <me@dsheiko.com>",
+  "main": "dist/aspect.js",
+  "typings": "./index.d.ts",
+
+  "scripts": {
+    "test": "tsc -p tests/ && mocha-phantomjs tests/index.html"
+  },
+
+  "keywords": [
+    "typescript",
+    "javascript",
+    "aop",
+    "aspect",
+    "logging",
+    "caching"
+  ],
+
+  "dependencies": {},
+  "devDependencies": {
+    "chai": "^3.3.0",
+    "es6-shim": "^0.35.1",
+    "mocha": "^2.3.4",
+    "systemjs": "^0.19.36"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "http://mit-license.org/"
+    }
+  ],
+  "maintainers": [
+    {
+      "name": "Dmitry Sheiko",
+      "email": "me@dsheiko.com",
+      "web": "http://dsheiko.com"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dsheiko/aop"
+  }
+}
