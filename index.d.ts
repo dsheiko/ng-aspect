@@ -1,5 +1,4 @@
-export var isEnabled:boolean;
-export function Contract( contracts:any );
-export class Exception {
-  stack: string;
-}
+export function Before( Ctor: Function, method: string );
+export function After( Ctor: Function, method: string );
+export function Pointcut( target: Object | Function, method: string,
+  descriptor: PropertyDescriptor ): PropertyDescriptor;
