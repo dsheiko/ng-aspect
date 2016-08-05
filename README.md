@@ -1,5 +1,9 @@
 # NgAspect 1.0 BETA
 
+[![NPM](https://nodei.co/npm/ng-aspect.png)](https://nodei.co/npm/ng-aspect/)
+
+[![Build Status](https://travis-ci.org/dsheiko/ng-aspect.png)](https://travis-ci.org/dsheiko/ng-aspect)
+
 `NgAspect` is a little library of decorators that unlocks aspect-oriented programming features in JavaScript.
 
 Aspect-oriented programming suggests separating cross-cutting concerns (logging, caching, monitoring,
