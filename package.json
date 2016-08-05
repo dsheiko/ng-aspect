@@ -5,11 +5,10 @@
   "author": "Dmitry Sheiko <me@dsheiko.com>",
   "main": "dist/aspect.js",
   "typings": "./index.d.ts",
-
   "scripts": {
-    "test": "tsc -p tests/ && mocha-phantomjs tests/index.html"
+    "test": "tslint --project tsconfig.json && tsc -p tests/ && mocha-phantomjs tests/index.html",
+    "test:ts": "tsc -p tests/ && mocha-phantomjs tests/index.html"
   },
-
   "keywords": [
     "typescript",
     "javascript",
@@ -18,13 +17,15 @@
     "logging",
     "caching"
   ],
-
   "dependencies": {},
   "devDependencies": {
     "chai": "^3.3.0",
     "es6-shim": "^0.35.1",
     "mocha": "^2.3.4",
-    "systemjs": "^0.19.36"
+    "mocha-phantomjs": "^4.1.0",
+    "systemjs": "^0.19.36",
+    "tslint": "^3.14.0",
+    "typescript": "^1.8.10"
   },
   "licenses": [
     {

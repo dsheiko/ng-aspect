@@ -10,7 +10,7 @@ export class Aspect {
    * @param {string} point - "before", "after"
    * @return Function[]
    */
-  getAdvicelist( Ctor: Function, method: string, point:string ):Function[] {
+  getAdvicelist( Ctor: Function, method: string, point: string ): Function[] {
     let prevCtor = this.aspectMap.get( Ctor ) || new Map< string, Map< string, Function[] > >();
     let prevMethod = prevCtor.get( method ) || new Map< string, Function[] >();
     return prevMethod.get( point ) || [];
@@ -22,7 +22,7 @@ export class Aspect {
    * @param {string} point - "before", "after"
    * @param {Function[]} advices - array of callbacks
    */
-  setAdvicelist( Ctor: Function, method: string, point:string, advices:Function[] ) {
+  setAdvicelist( Ctor: Function, method: string, point: string, advices: Function[] ) {
     let newCtor = this.aspectMap.get( Ctor ) || new Map< string, Map< string, Function[] > >();
     let nextMethod = newCtor.get( method ) || new Map< string, Function[] >();
     nextMethod.set( point, advices );
@@ -87,7 +87,8 @@ export function After( Ctor: Function, method: string ) {
 /**
  * Decorator to resolve the pointcut
  */
-export function Pointcut( target: Object | Function, method: string, descriptor: PropertyDescriptor ): PropertyDescriptor {
+export function Pointcut( target: Object | Function, method: string,
+  descriptor: PropertyDescriptor ): PropertyDescriptor {
 
   const callback = descriptor.value,
     context = (typeof target === "function") ? null : target,
