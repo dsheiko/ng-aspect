@@ -91,18 +91,18 @@ export function Pointcut( target: Object | Function, method: string,
   descriptor: PropertyDescriptor ): PropertyDescriptor {
 
   const callback = descriptor.value,
-    context = (typeof target === "function") ? null : target,
     Ctor = <Function>( ( typeof target === "function" ) ? target : target.constructor );
 
   return <PropertyDescriptor>Object.assign({}, descriptor, {
     value: function() {
+
       const args = Array.from( arguments );
       aspect.getAdvicelist( Ctor, method, "before" ).forEach(( cb ) => {
-        cb.apply( context, args );
+        cb.apply( this, args );
       });
-      let retVal = callback.apply( context, args );
+      let retVal = callback.apply( this, args );
       aspect.getAdvicelist( Ctor, method, "after" ).forEach(( cb ) => {
-        cb.apply( context, args );
+        cb.apply( this, args );
       });
       return retVal;
     }

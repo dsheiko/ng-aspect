@@ -219,6 +219,7 @@ describe("@Pointcut", function () {
     it("does not lose the context", function () {
         var Foo = (function () {
             function Foo() {
+                this.quiz = "quiz";
             }
             Foo.prototype.bar = function () {
                 return this.baz();
@@ -247,7 +248,8 @@ describe("@Pointcut", function () {
             ], Advice.prototype, "log", null);
             return Advice;
         }());
-        var ret = (new Foo()).bar();
-        expect(ret).to.eql("baz");
+        var foo = new Foo();
+        expect(foo.bar()).to.eql("baz");
+        expect(foo.quiz).to.eql("quiz");
     });
 });

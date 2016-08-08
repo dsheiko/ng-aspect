@@ -88,6 +88,7 @@ function Pointcut(target, method, descriptor) {
     var callback = descriptor.value, context = (typeof target === "function") ? null : target, Ctor = ((typeof target === "function") ? target : target.constructor);
     return Object.assign({}, descriptor, {
         value: function () {
+            console.info("CTX", this);
             var args = Array.from(arguments);
             aspect.getAdvicelist(Ctor, method, "before").forEach(function (cb) {
                 cb.apply(context, args);

@@ -147,6 +147,7 @@ describe( "@Pointcut", function(){
     });
     it( "does not lose the context", function() {
       class Foo {
+        quiz = "quiz";
         @Pointcut
         bar(){
           return this.baz();
@@ -161,7 +162,9 @@ describe( "@Pointcut", function(){
         log() {
         }
       }
-      let ret = (new Foo()).bar();
-      expect( ret ).to.eql( "baz" );
+      let foo = new Foo();
+      expect( foo.bar() ).to.eql( "baz" );
+      expect( foo.quiz ).to.eql( "quiz" );
+
     });
 });

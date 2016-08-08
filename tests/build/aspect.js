@@ -85,16 +85,17 @@ exports.After = After;
  * Decorator to resolve the pointcut
  */
 function Pointcut(target, method, descriptor) {
-    var callback = descriptor.value, context = (typeof target === "function") ? null : target, Ctor = ((typeof target === "function") ? target : target.constructor);
+    var callback = descriptor.value, Ctor = ((typeof target === "function") ? target : target.constructor);
     return Object.assign({}, descriptor, {
         value: function () {
+            var _this = this;
             var args = Array.from(arguments);
             aspect.getAdvicelist(Ctor, method, "before").forEach(function (cb) {
-                cb.apply(context, args);
+                cb.apply(_this, args);
             });
-            var retVal = callback.apply(context, args);
+            var retVal = callback.apply(this, args);
             aspect.getAdvicelist(Ctor, method, "after").forEach(function (cb) {
-                cb.apply(context, args);
+                cb.apply(_this, args);
             });
             return retVal;
         }

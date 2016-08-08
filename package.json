@@ -1,7 +1,7 @@
 {
   "name": "ng-aspect",
   "description": "Decorators to unlock aspect-oriented programming experience in JavaScript",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "author": "Dmitry Sheiko <me@dsheiko.com>",
   "main": "dist/aspect.js",
   "typings": "./index.d.ts",
