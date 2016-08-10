@@ -55,15 +55,42 @@ var Aspect = (function () {
 }());
 exports.Aspect = Aspect;
 var aspect = new Aspect();
+function parseArgs(mapping, method) {
+    var mappingArr = [];
+    // @Before( Ctor, "method" )
+    if (typeof mapping === "function") {
+        mappingArr.push([mapping, method]);
+        return mappingArr;
+    }
+    if (!Array.isArray(mapping) || !mapping.length) {
+        throw new Error("@Before/@After first argument must be function or not empty array");
+    }
+    // @Before([
+    //  [ Ctor, "method" ], [ Ctor, "method" ]
+    // ])
+    if (Array.isArray(mapping[0])) {
+        mappingArr = mapping;
+    }
+    else {
+        // @Before([ Ctor, "method" ])
+        mappingArr.push(mapping);
+    }
+    return mappingArr;
+}
+exports.parseArgs = parseArgs;
 /**
  * Decorator to map pre-execution advice to a pointcut
  * @param {Function} Ctor - Pointcut constructor
  * @param {string} method - Pointcut method
  */
-function Before(Ctor, method) {
+function Before(mapping, method) {
+    var mappingArr = parseArgs.apply(this, arguments);
     return function (target, propKey, descriptor) {
         var callback = descriptor.value;
-        aspect.addAdviceBefore(Ctor, method, callback);
+        mappingArr.forEach(function (pair) {
+            var Ctor = pair[0], method = pair[1];
+            aspect.addAdviceBefore(Ctor, method, callback);
+        });
         return descriptor;
     };
 }
@@ -73,10 +100,14 @@ exports.Before = Before;
  * @param {Function} Ctor - Pointcut constructor
  * @param {string} method - Pointcut method
  */
-function After(Ctor, method) {
+function After(mapping, method) {
+    var mappingArr = parseArgs.apply(this, arguments);
     return function (target, propKey, descriptor) {
         var callback = descriptor.value;
-        aspect.addAdviceAfter(Ctor, method, callback);
+        mappingArr.forEach(function (pair) {
+            var Ctor = pair[0], method = pair[1];
+            aspect.addAdviceAfter(Ctor, method, callback);
+        });
         return descriptor;
     };
 }

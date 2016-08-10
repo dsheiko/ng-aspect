@@ -58,15 +58,50 @@ export class Aspect {
 let aspect = new Aspect();
 
 
+interface MappingPair extends Array<Function | string> {
+  [ inx: number ]: Function | string;
+}
+interface MappingArray<MappingPair> extends Array<MappingPair>{
+  [ inx: number ]: MappingPair;
+}
+
+export function parseArgs( mapping: MappingPair | MappingArray<MappingPair> | Function, method?: string ) {
+  let mappingArr: MappingArray<MappingPair> = [];
+
+  // @Before( Ctor, "method" )
+  if ( typeof mapping === "function" ) {
+    mappingArr.push([ <Function>mapping, method ]);
+    return mappingArr;
+  }
+  if ( !Array.isArray( mapping ) || !mapping.length ) {
+    throw new Error( "@Before/@After first argument must be function or not empty array" );
+  }
+  // @Before([
+  //  [ Ctor, "method" ], [ Ctor, "method" ]
+  // ])
+  if ( Array.isArray( ( <MappingArray<MappingPair>>mapping )[ 0 ] ) ) {
+    mappingArr = <MappingArray<MappingPair>>mapping;
+  } else {
+  // @Before([ Ctor, "method" ])
+    mappingArr.push( <MappingPair>mapping );
+  }
+
+  return mappingArr;
+}
+
 /**
  * Decorator to map pre-execution advice to a pointcut
  * @param {Function} Ctor - Pointcut constructor
  * @param {string} method - Pointcut method
  */
-export function Before( Ctor: Function, method: string ) {
+export function Before( mapping: MappingPair | MappingArray<MappingPair> | Function, method?: string ) {
+  let mappingArr: MappingArray<MappingPair> = parseArgs.apply( this, arguments );
   return function(target: Object | Function, propKey: string, descriptor: PropertyDescriptor): PropertyDescriptor {
     const callback = descriptor.value;
-    aspect.addAdviceBefore( Ctor, method, callback );
+    mappingArr.forEach(( pair: MappingPair ) => {
+      let Ctor: Function = <Function>pair[ 0 ], method: string = <string>pair[ 1 ];
+      aspect.addAdviceBefore( Ctor, method, callback );
+    });
     return descriptor;
   };
 }
@@ -76,10 +111,14 @@ export function Before( Ctor: Function, method: string ) {
  * @param {Function} Ctor - Pointcut constructor
  * @param {string} method - Pointcut method
  */
-export function After( Ctor: Function, method: string ) {
+export function After( mapping: MappingPair | MappingArray<MappingPair> | Function, method?: string ) {
+  let mappingArr: MappingArray<MappingPair> = parseArgs.apply( this, arguments );
   return function(target: Object | Function, propKey: string, descriptor: PropertyDescriptor): PropertyDescriptor {
     const callback = descriptor.value;
-    aspect.addAdviceAfter( Ctor, method, callback );
+    mappingArr.forEach(( pair: MappingPair ) => {
+      let Ctor: Function = <Function>pair[ 0 ], method: string = <string>pair[ 1 ];
+      aspect.addAdviceAfter( Ctor, method, callback );
+    });
     return descriptor;
   };
 }

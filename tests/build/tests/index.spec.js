@@ -1,0 +1,11 @@
+"use strict";
+var aspect_spec_1 = require("./aspect.spec");
+var parseargs_spec_1 = require("./parseargs.spec");
+var before_spec_1 = require("./before.spec");
+var after_spec_1 = require("./after.spec");
+var pointcut_spec_1 = require("./pointcut.spec");
+aspect_spec_1.AspectSpec();
+parseargs_spec_1.ParseArgsSpec();
+before_spec_1.BeforeSpec();
+after_spec_1.AfterSpec();
+pointcut_spec_1.PointcutSpec();

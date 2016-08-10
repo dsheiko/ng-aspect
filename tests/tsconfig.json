@@ -12,6 +12,6 @@
   },
   "files": [
     "../typings/index.d.ts",
-    "./aspect.spec.ts"
+    "./index.spec.ts"
   ]
 }

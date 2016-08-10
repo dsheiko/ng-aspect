@@ -50,6 +50,7 @@ calling bar 1,2,3
 calling post-log
 ```
 
+
 The same goes for static methods
 
 ```javascript
@@ -73,5 +74,28 @@ class Advice {
 Foo.bar();
 
 ```
+
+# Syntax
+
+## Setting a single target
+```
+@Before( Foo, "bar" )
+@After( Foo, "bar" )
+```
+or
+```
+@Before([ Foo, "bar" ])
+@After([ Foo, "bar" ])
+```
+
+## Setting multiple targets
+```
+@Before([
+  [ Foo, "bar" ],
+  [ Baz, "quiz" ],
+])
+
+```
+
 
 [![Analytics](https://ga-beacon.appspot.com/UA-1150677-13/dsheiko/ng-aspect)](http://githalytics.com/dsheiko/ng-aspect)
