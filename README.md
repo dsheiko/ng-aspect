@@ -11,7 +11,8 @@ data validation, error detection and so on) from main business logic. In brief i
 * advice - code implementing cross-cutting concerns
 * pointcut - when code where in your main code advices shall be applied
 
-`NgAspect` provides decorators `@Before` and `@After` that allow to bind an advice to a pointcut e.g. `@Before( Class/Constructor, "methodName" )`.
+`NgAspect` provides decorators `@Before` and `@After` that allow to bind an advice to a pointcut e.g. `@Before( Class/Constructor, "methodName" )`
+or `@Before([ [Class/Constructor, "methodName"], [Class/Constructor, "methodName"] ])`.
 It also exports `@Pointcut` decorator that points out what method can be supplied with advices.
 
 
@@ -75,7 +76,12 @@ Foo.bar();
 
 ```
 
-# Syntax
+# API
+
+## Setting a pointcut
+```
+@Pointcut
+```
 
 ## Setting a single target
 ```
@@ -96,6 +102,8 @@ or
 ])
 
 ```
+
+
 
 
 [![Analytics](https://ga-beacon.appspot.com/UA-1150677-13/dsheiko/ng-aspect)](http://githalytics.com/dsheiko/ng-aspect)
