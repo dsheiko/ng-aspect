@@ -1,5 +1,9 @@
 # NgAspect 1.0 BETA
 
+[![No Maintenance Intended](http://unmaintained.tech/badge.svg)](http://unmaintained.tech/)
+
+> WARNING - THIS PROJECT IS NO LONGER MAINTAINED!!!
+
 [![NPM](https://nodei.co/npm/ng-aspect.png)](https://nodei.co/npm/ng-aspect/)
 
 [![Build Status](https://travis-ci.org/dsheiko/ng-aspect.png)](https://travis-ci.org/dsheiko/ng-aspect)
